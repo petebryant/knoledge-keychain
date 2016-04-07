@@ -34,7 +34,6 @@ namespace knoledge_keychain
                     return new BitcoinScriptAddress(what, network);
                 case Base58Type.STEALTH_ADDRESS:                            // BitcoinStealthAddress( Key.PubKey, new[] { Key.PubKey }, 1, null, Network.TestNet);
                     return new BitcoinStealthAddress(what, network);
-                case Base58Type.MAX_BASE58_TYPES:
                 default:
                     return null;
             }

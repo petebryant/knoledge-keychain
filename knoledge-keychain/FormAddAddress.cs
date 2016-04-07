@@ -40,5 +40,10 @@ namespace knoledge_keychain
                 Close();
             }
         }
+
+        private void FormAddAddress_Load(object sender, EventArgs e)
+        {
+            textBoxAddress.Focus();
+        }
     }
 }

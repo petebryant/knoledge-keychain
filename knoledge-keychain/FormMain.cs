@@ -56,7 +56,11 @@ namespace knoledge_keychain
 
             if (address != null)
             {
-                MessageBox.Show(address.ToString());
+                using (FormDetails form = new FormDetails())
+                {
+                    form.Address = address;
+                    form.ShowDialog();
+                }
             }
         }
 

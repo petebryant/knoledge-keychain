@@ -41,7 +41,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(703, 89);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 35);
-            this.buttonCancel.TabIndex = 0;
+            this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
@@ -51,7 +51,7 @@
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(183, 20);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Enter a Base58 Address";
             // 
             // textBoxAddress
@@ -62,7 +62,7 @@
             this.textBoxAddress.Location = new System.Drawing.Point(16, 41);
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.Size = new System.Drawing.Size(762, 26);
-            this.textBoxAddress.TabIndex = 2;
+            this.textBoxAddress.TabIndex = 1;
             // 
             // buttonOk
             // 
@@ -71,7 +71,7 @@
             this.buttonOk.Location = new System.Drawing.Point(622, 89);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 35);
-            this.buttonOk.TabIndex = 3;
+            this.buttonOk.TabIndex = 2;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
@@ -91,6 +91,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Address";
+            this.Load += new System.EventHandler(this.FormAddAddress_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -66,6 +66,12 @@
     <Compile Include="FormAddAddress.Designer.cs">
       <DependentUpon>FormAddAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDetails.Designer.cs">
+      <DependentUpon>FormDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormValidateBase58.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,9 @@
     <Compile Include="Util.cs" />
     <EmbeddedResource Include="FormAddAddress.resx">
       <DependentUpon>FormAddAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDetails.resx">
+      <DependentUpon>FormDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormValidateBase58.resx">
       <DependentUpon>FormValidateBase58.cs</DependentUpon>
