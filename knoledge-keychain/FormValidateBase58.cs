@@ -12,11 +12,11 @@ namespace knoledge_keychain
 {
 
     // see keys.txt for examples of Base58 strings.
-    public partial class FormAddAddress: Form
+    public partial class FormValidateBase58 : Form
     {
         public object Result { get; internal set; }
 
-        public FormAddAddress()
+        public FormValidateBase58()
         {
             InitializeComponent();
         }
@@ -29,7 +29,7 @@ namespace knoledge_keychain
                 return;
             }
 
-            Result = Util.InterpretAddress(textBoxAddress.Text);
+            Result = Util.GetBase58Type(textBoxAddress.Text);
 
             if (Result == null)
             {

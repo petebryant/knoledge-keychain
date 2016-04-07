@@ -1,83 +1,118 @@
-﻿// Copyright 2012 Mike Caldwell (Casascius)
-// This file is part of Bitcoin Address Utility.
-
-// Bitcoin Address Utility is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-
-// Bitcoin Address Utility is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-
-// You should have received a copy of the GNU General Public License
-// along with Bitcoin Address Utility.  If not, see http://www.gnu.org/licenses/.
-
-
+﻿
+using NBitcoin;
+using NBitcoin.DataEncoders;
+using NBitcoin.OpenAsset;
+using NBitcoin.Stealth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
-using System.Security.Cryptography;
-using System.IO;
+using System.Text.RegularExpressions;
 
-
-namespace Casascius.Bitcoin
+namespace knoledge_keychain
 {
+
     public class Util
-    {        /// <summary>
-        /// Converts a hex string to bytes.  Hex chars can optionally be space-delimited, otherwise,
-        /// any two contiguous hex chars are considered to be a byte.  If testingForValidHex==true,
-        /// then if any invalid characters are found, the function returns null instead of bytes.
-        /// </summary>
-        public static byte[] HexStringToBytes(string source, bool testingForValidHex = false)
+    {
+        public static object InterpretAddress(string what)
         {
-            List<byte> bytes = new List<byte>();
-            bool gotFirstChar = false;
-            byte accum = 0;
+            if (what == null) return null;
 
-            foreach (char c in source.ToCharArray())
+            what = what.Trim();
+            Base58Type? type = GetBase58Type(what);
+            Network network = Network.TestNet;
+
+            if (type == null) return null;
+
+            switch (type)
             {
-                if (c == ' ' || c == '-' || c == ':')
-                {
-                    // if we got a space, then accept it as the end if we have 1 character.
-                    if (gotFirstChar)
-                    {
-                        bytes.Add(accum);
-                        accum = 0;
-                        gotFirstChar = false;
-                    }
-                }
-                else if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'))
-                {
-                    // get the character's value
-                    byte v = (byte)(c - 0x30);
-                    if (c >= 'A' && c <= 'F') v = (byte)(c + 0x0a - 'A');
-                    if (c >= 'a' && c <= 'f') v = (byte)(c + 0x0a - 'a');
+                case Base58Type.COLORED_ADDRESS:                            // BitcoinColoredAddress(BitcoinAddress);
+                    return new BitcoinColoredAddress(what, network);
+                case Base58Type.PUBKEY_ADDRESS:                             // Key.PubKey.GetAddress(Network.TestNet);
+                    return new BitcoinAddress(what, network);
+                case Base58Type.SCRIPT_ADDRESS:                             // PubKey.ScriptPubKey.GetScriptAddress(Network.TestNet)
+                    return new BitcoinScriptAddress(what, network);
+                case Base58Type.STEALTH_ADDRESS:                            // BitcoinStealthAddress( Key.PubKey, new[] { Key.PubKey }, 1, null, Network.TestNet);
+                    return new BitcoinStealthAddress(what, network);
+                case Base58Type.MAX_BASE58_TYPES:
+                default:
+                    return null;
+            }
+        }
+        public static object Interpret(string what)
+        {
+            if (what == null) return null;
 
-                    if (gotFirstChar == false)
-                    {
-                        gotFirstChar = true;
-                        accum = v;
-                    }
-                    else
-                    {
-                        accum <<= 4;
-                        accum += v;
-                        bytes.Add(accum);
-                        accum = 0;
-                        gotFirstChar = false;
-                    }
-                }
-                else
+            what = what.Trim();
+            Base58Type? type = GetBase58Type(what);
+            Network network =  Network.TestNet;
+
+            if (type == null) return null;
+
+            switch (type)
+            {
+                case Base58Type.ASSET_ID:                                   // AssetId(BitcoinAddress).GetWif(Network.TestNet);
+                    return new BitcoinAssetId(what);
+                case Base58Type.COLORED_ADDRESS:                            // BitcoinColoredAddress(BitcoinAddress);
+                    return new BitcoinColoredAddress(what, network);
+                case Base58Type.CONFIRMATION_CODE:                          // Key.ConfirmationCode
+                    return new BitcoinConfirmationCode(what, network);
+                case Base58Type.ENCRYPTED_SECRET_KEY_EC:                    // BitcoinPassphraseCode("my secret", Network.TestNet, null).GenerateEncryptedSecret().EncryptedKey
+                    return new BitcoinEncryptedSecretEC(what, network);
+                case Base58Type.ENCRYPTED_SECRET_KEY_NO_EC:                 // BitcoinEncryptedSecretNoEC(Key,"Password", Network.TestNet);
+                    return new BitcoinEncryptedSecretNoEC(what, network);
+                case Base58Type.EXT_PUBLIC_KEY:                             // Key.PubKey;
+                    return ExtPubKey.Parse(what, Network.TestNet);
+                case Base58Type.EXT_SECRET_KEY:                             // BitcoinExtKey(ExtKey.GetWif(Network.TestNet), Network.TestNet);
+                    return new BitcoinExtKey(what, network);
+                case Base58Type.PASSPHRASE_CODE:                            // BitcoinPassphraseCode("my secret", Network.TestNet, null);
+                    return new BitcoinPassphraseCode(what, network);
+                case Base58Type.PUBKEY_ADDRESS:                             // Key.PubKey.GetAddress(Network.TestNet);
+                    return new BitcoinAddress(what, network);
+                case Base58Type.SCRIPT_ADDRESS:                             // PubKey.ScriptPubKey.GetScriptAddress(Network.TestNet)
+                    return new BitcoinScriptAddress(what, network);
+                case Base58Type.SECRET_KEY:                                 // Key.GetBitcoinSecret(Network.TestNet)
+                    return new BitcoinSecret(what, network);
+                case Base58Type.STEALTH_ADDRESS:                            // BitcoinStealthAddress( Key.PubKey, new[] { Key.PubKey }, 1, null, Network.TestNet);
+                    return new BitcoinStealthAddress(what, network);
+                case Base58Type.MAX_BASE58_TYPES:
+                default:
+                    return null;
+            }
+        }
+
+        public static Base58Type? GetBase58Type(string base58)
+        {
+            try
+            {
+                byte[][] base58Prefixes = new byte[12][];
+                base58Prefixes[(int)Base58Type.PUBKEY_ADDRESS] = new byte[] { (111) };
+                base58Prefixes[(int)Base58Type.SCRIPT_ADDRESS] = new byte[] { (196) };
+                base58Prefixes[(int)Base58Type.SECRET_KEY] = new byte[] { (239) };
+                base58Prefixes[(int)Base58Type.ENCRYPTED_SECRET_KEY_NO_EC] = new byte[] { 0x01, 0x42 };
+                base58Prefixes[(int)Base58Type.ENCRYPTED_SECRET_KEY_EC] = new byte[] { 0x01, 0x43 };
+                base58Prefixes[(int)Base58Type.EXT_PUBLIC_KEY] = new byte[] { (0x04), (0x35), (0x87), (0xCF) };
+                base58Prefixes[(int)Base58Type.EXT_SECRET_KEY] = new byte[] { (0x04), (0x35), (0x83), (0x94) };
+                base58Prefixes[(int)Base58Type.PASSPHRASE_CODE] = new byte[] { 0x2C, 0xE9, 0xB3, 0xE1, 0xFF, 0x39, 0xE2 };
+                base58Prefixes[(int)Base58Type.CONFIRMATION_CODE] = new byte[] { 0x64, 0x3B, 0xF6, 0xA8, 0x9A };
+                base58Prefixes[(int)Base58Type.STEALTH_ADDRESS] = new byte[] { 0x2b };
+                base58Prefixes[(int)Base58Type.ASSET_ID] = new byte[] { 115 };
+                base58Prefixes[(int)Base58Type.COLORED_ADDRESS] = new byte[] { 0x13 };
+
+                var bytes = Encoders.Base58Check.DecodeData(base58);
+                for (int i = 0; i < base58Prefixes.Length; i++)
                 {
-                    if (testingForValidHex) return null;
+                    var prefix = base58Prefixes[i];
+                    if (bytes.Length < prefix.Length)
+                        continue;
+                    if (Utils.ArrayEqual(bytes, 0, prefix, 0, prefix.Length))
+                        return (Base58Type)i;
                 }
             }
-            if (gotFirstChar) bytes.Add(accum);
-            return bytes.ToArray();
+            catch { }
+
+            return null;
         }
     }
 }
+

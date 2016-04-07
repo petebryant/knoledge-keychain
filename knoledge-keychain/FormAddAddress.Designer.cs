@@ -50,9 +50,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(266, 20);
+            this.label1.Size = new System.Drawing.Size(183, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Enter an address or key (any format)";
+            this.label1.Text = "Enter a Base58 Address";
             // 
             // textBoxAddress
             // 
