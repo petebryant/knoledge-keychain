@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ThoughtWorks.QRCode.Codec;
 
 namespace knoledge_keychain
 {
@@ -78,9 +79,20 @@ namespace knoledge_keychain
             textBoxBitcoinAddress.Focus();
         }
 
-        private void buttonBlockr_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Close();
+        }
 
+        private void createQRCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxBitcoinAddress.Text)) return;
+
+            using (FormQRCode form = new FormQRCode())
+            {
+                form.Address = textBoxBitcoinAddress.Text;
+                form.ShowDialog();
+            }
         }
 
 
