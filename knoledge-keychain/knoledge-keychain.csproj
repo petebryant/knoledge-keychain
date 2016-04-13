@@ -64,17 +64,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAddKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddKey.Designer.cs">
+      <DependentUpon>FormAddKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAddAddress.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormAddAddress.Designer.cs">
       <DependentUpon>FormAddAddress.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormDetails.cs">
+    <Compile Include="FormKeyDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDetails.Designer.cs">
-      <DependentUpon>FormDetails.cs</DependentUpon>
+    <Compile Include="FormKeyDetails.Designer.cs">
+      <DependentUpon>FormKeyDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddressDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddressDetails.Designer.cs">
+      <DependentUpon>FormAddressDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="FormQRCode.cs">
       <SubType>Form</SubType>
@@ -94,14 +106,22 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="KeyPair.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util.cs" />
+    <EmbeddedResource Include="FormAddKey.resx">
+      <DependentUpon>FormAddKey.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAddAddress.resx">
       <DependentUpon>FormAddAddress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormDetails.resx">
-      <DependentUpon>FormDetails.cs</DependentUpon>
+    <EmbeddedResource Include="FormKeyDetails.resx">
+      <DependentUpon>FormKeyDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddressDetails.resx">
+      <DependentUpon>FormAddressDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormQRCode.resx">
       <DependentUpon>FormQRCode.cs</DependentUpon>

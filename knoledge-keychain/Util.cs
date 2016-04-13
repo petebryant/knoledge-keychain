@@ -38,6 +38,34 @@ namespace knoledge_keychain
                     return null;
             }
         }
+
+        public static object InterpretKey(string what)
+        {
+            if (what == null) return null;
+
+            what = what.Trim();
+            Base58Type? type = GetBase58Type(what);
+            Network network = Network.TestNet;
+
+            if (type == null) return null;
+
+            switch (type)
+            {
+                case Base58Type.ENCRYPTED_SECRET_KEY_EC:                    // BitcoinPassphraseCode("my secret", Network.TestNet, null).GenerateEncryptedSecret().EncryptedKey
+                    return new BitcoinEncryptedSecretEC(what, network);
+                case Base58Type.ENCRYPTED_SECRET_KEY_NO_EC:                 // BitcoinEncryptedSecretNoEC(Key,"Password", Network.TestNet);
+                    return new BitcoinEncryptedSecretNoEC(what, network);
+                case Base58Type.EXT_PUBLIC_KEY:                             // Key.PubKey;
+                    return ExtPubKey.Parse(what, Network.TestNet);
+                case Base58Type.EXT_SECRET_KEY:                             // BitcoinExtKey(ExtKey.GetWif(Network.TestNet), Network.TestNet);
+                    return new BitcoinExtKey(what, network);
+                case Base58Type.SECRET_KEY:                                 // Key.GetBitcoinSecret(Network.TestNet)
+                    return new BitcoinSecret(what, network);
+                default:
+                    return null;
+            }
+        }
+
         public static object Interpret(string what)
         {
             if (what == null) return null;

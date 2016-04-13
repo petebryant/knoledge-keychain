@@ -13,10 +13,10 @@ using ThoughtWorks.QRCode.Codec;
 
 namespace knoledge_keychain
 {
-    public partial class FormDetails : Form
+    public partial class FormAddressDetails : Form
     {
         public object Address { get; set; }
-        public FormDetails()
+        public FormAddressDetails()
         {
             InitializeComponent();
         }
@@ -28,11 +28,7 @@ namespace knoledge_keychain
             string hash = "";
             string script = "";
             string base58Type = "";
-
-
-
             Type type = Address.GetType();
-
 
             switch (type.ToString())
             {

@@ -12,28 +12,28 @@ namespace knoledge_keychain
 {
 
     // see keys.txt for examples of Base58 strings.
-    public partial class FormAddAddress: Form
+    public partial class FormAddKey: Form
     {
         public object Result { get; internal set; }
 
-        public FormAddAddress()
+        public FormAddKey()
         {
             InitializeComponent();
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxAddress.Text))
+            if (string.IsNullOrEmpty(textBoxKey.Text))
             {
-                MessageBox.Show("Enter an address.");
+                MessageBox.Show("Enter a key.");
                 return;
             }
 
-            Result = Util.InterpretAddress(textBoxAddress.Text);
+            Result = Util.InterpretKey(textBoxKey.Text);
 
             if (Result == null)
             {
-                MessageBox.Show("Unrecognized or invalid address.");
+                MessageBox.Show("Unrecognized or invalid key.");
             }
             else
             {
@@ -41,9 +41,9 @@ namespace knoledge_keychain
             }
         }
 
-        private void FormAddAddress_Load(object sender, EventArgs e)
+        private void FormAddKey_Load(object sender, EventArgs e)
         {
-            textBoxAddress.Focus();
+            textBoxKey.Focus();
         }
     }
 }

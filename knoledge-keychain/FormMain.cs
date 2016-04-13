@@ -45,21 +45,37 @@ namespace knoledge_keychain
                     ListViewItem lvi = new ListViewItem();
                     lvi.Text = form.Result.ToString();
                     lvi.Tag = form.Result;
-                    listView.Items.Add(lvi);
+                    listViewAddress.Items.Add(lvi);
                 }
             }
         }
 
         private void detailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var address = listView.SelectedItems[0].Tag;
-
-            if (address != null)
+            if (contextMenuStrip.SourceControl == listViewAddress)
             {
-                using (FormDetails form = new FormDetails())
+                var address = listViewAddress.SelectedItems[0].Tag;
+
+                if (address != null)
                 {
-                    form.Address = address;
-                    form.ShowDialog();
+                    using (FormAddressDetails form = new FormAddressDetails())
+                    {
+                        form.Address = address;
+                        form.ShowDialog();
+                    }
+                }
+            }
+            else if (contextMenuStrip.SourceControl == listViewKey)
+            {
+                var key = listViewKey.SelectedItems[0].Tag as KeyPair;
+
+                if (key != null)
+                {
+                    using (FormKeyDetails form = new FormKeyDetails())
+                    {
+                        form.Key = key;
+                        form.ShowDialog();
+                    }
                 }
             }
         }
@@ -80,9 +96,72 @@ namespace knoledge_keychain
 
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
-            if (listView.SelectedItems.Count <= 0)
+            ContextMenuStrip menu = sender as ContextMenuStrip;
+
+            if (menu != null)
             {
-                e.Cancel = true;
+                if (menu.SourceControl == listViewAddress && listViewAddress.SelectedItems.Count <= 0)
+                {
+                    e.Cancel = true;
+                }
+                else if (menu.SourceControl == listViewKey && listViewKey.SelectedItems.Count <= 0)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void newAddressToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            KeyPair keyPair = new KeyPair();
+            ListViewItem lvi = new ListViewItem();
+            lvi.Text = keyPair.Address.ToString();
+            lvi.Tag = keyPair.Address;
+            listViewAddress.Items.Add(lvi);
+        }
+
+        private void newKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            KeyPair keyPair = new KeyPair();
+
+            string[] subItems = { keyPair.PubKey.ToString(), keyPair.Address.ToString() };
+            
+            ListViewItem lvi = new ListViewItem();
+            lvi.Text = keyPair.PrivateKey.ToString();
+            lvi.Tag = keyPair;
+            lvi.SubItems.AddRange(subItems);
+            listViewKey.Items.Add(lvi);
+        }
+
+        private void addKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormAddKey form = new FormAddKey())
+            {
+                if (form.ShowDialog() == DialogResult.OK && form.Result != null)
+                {
+                    KeyPair keyPair = null;
+                    Type type = form.Result.GetType();
+
+                    switch (type.ToString())
+                    {
+                        case "NBitcoin.ExtPubKey":
+                            ExtPubKey pubKey = form.Result as ExtPubKey;
+                            keyPair = new KeyPair(pubKey);
+                            break;
+                    }
+
+                    
+
+                    if (keyPair == null) return;
+
+                    string[] subItems = { keyPair.PubKey.ToString(), keyPair.Address.ToString() };
+
+                    ListViewItem lvi = new ListViewItem();
+                    lvi.Text = keyPair.PrivateKeyString;
+                    lvi.Tag = keyPair;
+                    lvi.SubItems.AddRange(subItems);
+                    listViewKey.Items.Add(lvi);
+                }
             }
         }
     }
