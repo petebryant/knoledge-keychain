@@ -15,7 +15,7 @@ namespace knoledge_keychain
 {
     public partial class FormKeyDetails : Form
     {
-        public KeyPair Key { get; set; }
+        public object Key { get; set; }
         public FormKeyDetails()
         {
             InitializeComponent();
@@ -25,11 +25,48 @@ namespace knoledge_keychain
         {
             if (Key == null) return;
 
-            textBoxPrivateKey.Text = Key.PrivateKeyString;
-            textBoxBitcoinAddress.Text = Key.Address.ToString();
-            textBoxPubHash.Text = Key.PubKey.ExtPubKey.PubKey.Hash.ToString();
-            textBoxPubKey.Text = Key.PubKey.ToString();
-            textBoxScriptPubKey.Text = Key.PubKey.ScriptPubKey.ToString();
+            string privateKey = "";
+            string pubKey = "";
+            string address = "";
+            string hash = "";
+            string script = "";
+            string base58Type = "";
+
+            Type type = Key.GetType();
+
+            switch (type.ToString())
+            {
+                case "knoledge_keychain.KeyPair":
+                    KeyPair keyPair = Key as KeyPair;
+                    privateKey = keyPair.PrivateKeyString;
+                    pubKey = keyPair.PubKey.ToString();
+                    address = keyPair.Address.ToString();
+                    hash = keyPair.PubKey.ExtPubKey.PubKey.Hash.ToString();
+                    script = keyPair.PubKey.ScriptPubKey.ToString();
+
+                    if (keyPair.PrivateKey != null)
+                        base58Type = keyPair.PrivateKey.Type.ToString();
+                    else
+                        base58Type = keyPair.PubKey.Type.ToString();
+                    break;
+                case "NBitcoin.BitcoinSecret":
+                    BitcoinSecret secret = Key as BitcoinSecret;
+                    privateKey = secret.ToWif();
+                    BitcoinAddress bitcoinAddress = secret.GetAddress();
+                    address = bitcoinAddress.ToString();
+                    hash = secret.PubKey.Hash.ToString();
+                    script = bitcoinAddress.ScriptPubKey.ToString();
+                    base58Type = secret.Type.ToString();
+                    break;
+
+            }
+
+            textBoxType.Text = base58Type;
+            textBoxPrivateKey.Text = privateKey;
+            textBoxBitcoinAddress.Text = address;
+            textBoxPubHash.Text = hash;
+            textBoxPubKey.Text = pubKey;
+            textBoxScriptPubKey.Text = script;
 
             textBoxPrivateKey.Focus();
         }

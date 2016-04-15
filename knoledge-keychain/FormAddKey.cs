@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NBitcoin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,7 +38,55 @@ namespace knoledge_keychain
             }
             else
             {
-                Close();
+                Type type = Result.GetType();
+                switch (type.ToString())
+                {
+                    case "NBitcoin.BitcoinEncryptedSecretEC":
+                        if (string.IsNullOrEmpty(textBoxPassword.Text))
+                        {
+                            textBoxPassword.Enabled = true;
+                            MessageBox.Show(this, "This is an encrypted BitcoinSecret, please provide the password.", "Knoledge-keychain", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                BitcoinEncryptedSecretEC encEC = Result as BitcoinEncryptedSecretEC;
+                                Result = encEC.GetKey(textBoxPassword.Text).GetBitcoinSecret(Network.TestNet);
+                                DialogResult = System.Windows.Forms.DialogResult.OK;
+                            }
+                            catch 
+                            { 
+                                MessageBox.Show(this, "The pasword you entered is incorrect.", "Knoledge-keychain", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                            }
+                        }
+                        break;
+                    case "NBitcoin.BitcoinEncryptedSecretNoEC":
+                        if (string.IsNullOrEmpty(textBoxPassword.Text))
+                        {
+                            textBoxPassword.Enabled = true;
+                            MessageBox.Show(this, "This is an encrypted BitcoinSecret, please provide the password.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                BitcoinEncryptedSecretNoEC encEC = Result as BitcoinEncryptedSecretNoEC;
+                                Result = encEC.GetKey(textBoxPassword.Text).GetBitcoinSecret(Network.TestNet);
+                                DialogResult = System.Windows.Forms.DialogResult.OK;
+                            }
+                            catch
+                            {
+                                MessageBox.Show(this, "The pasword you entered is incorrect.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        break;
+                    default:
+                        DialogResult = System.Windows.Forms.DialogResult.OK;
+                        break;
+                }
             }
         }
 

@@ -44,80 +44,82 @@
             this.displayTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPubHash = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxType = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 199);
+            this.label5.Location = new System.Drawing.Point(18, 236);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(120, 20);
-            this.label5.TabIndex = 8;
+            this.label5.TabIndex = 10;
             this.label5.Text = "Bitcoin Address";
             // 
             // textBoxBitcoinAddress
             // 
-            this.textBoxBitcoinAddress.Location = new System.Drawing.Point(159, 195);
+            this.textBoxBitcoinAddress.Location = new System.Drawing.Point(162, 232);
             this.textBoxBitcoinAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxBitcoinAddress.Name = "textBoxBitcoinAddress";
             this.textBoxBitcoinAddress.Size = new System.Drawing.Size(834, 26);
-            this.textBoxBitcoinAddress.TabIndex = 9;
+            this.textBoxBitcoinAddress.TabIndex = 11;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 94);
+            this.label4.Location = new System.Drawing.Point(18, 131);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(81, 20);
-            this.label4.TabIndex = 2;
+            this.label4.TabIndex = 4;
             this.label4.Text = "Public Key";
             // 
             // textBoxPubKey
             // 
-            this.textBoxPubKey.Location = new System.Drawing.Point(159, 89);
+            this.textBoxPubKey.Location = new System.Drawing.Point(162, 126);
             this.textBoxPubKey.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxPubKey.Name = "textBoxPubKey";
             this.textBoxPubKey.Size = new System.Drawing.Size(834, 26);
-            this.textBoxPubKey.TabIndex = 3;
+            this.textBoxPubKey.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 164);
+            this.label2.Location = new System.Drawing.Point(18, 201);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 20);
-            this.label2.TabIndex = 6;
+            this.label2.TabIndex = 8;
             this.label2.Text = "Script Pub Key";
             // 
             // textBoxScriptPubKey
             // 
-            this.textBoxScriptPubKey.Location = new System.Drawing.Point(159, 159);
+            this.textBoxScriptPubKey.Location = new System.Drawing.Point(162, 196);
             this.textBoxScriptPubKey.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxScriptPubKey.Name = "textBoxScriptPubKey";
             this.textBoxScriptPubKey.Size = new System.Drawing.Size(834, 26);
-            this.textBoxScriptPubKey.TabIndex = 7;
+            this.textBoxScriptPubKey.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 57);
+            this.label3.Location = new System.Drawing.Point(18, 94);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 20);
-            this.label3.TabIndex = 0;
+            this.label3.TabIndex = 2;
             this.label3.Text = "Private Key";
             // 
             // textBoxPrivateKey
             // 
-            this.textBoxPrivateKey.Location = new System.Drawing.Point(159, 53);
+            this.textBoxPrivateKey.Location = new System.Drawing.Point(162, 90);
             this.textBoxPrivateKey.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxPrivateKey.Name = "textBoxPrivateKey";
             this.textBoxPrivateKey.Size = new System.Drawing.Size(834, 26);
-            this.textBoxPrivateKey.TabIndex = 1;
+            this.textBoxPrivateKey.TabIndex = 3;
             // 
             // menuStrip
             // 
@@ -143,7 +145,7 @@
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(211, 30);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(189, 30);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -172,26 +174,47 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 128);
+            this.label1.Location = new System.Drawing.Point(18, 165);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(133, 20);
-            this.label1.TabIndex = 4;
+            this.label1.TabIndex = 6;
             this.label1.Text = "Public Key (Hash)";
             // 
             // textBoxPubHash
             // 
-            this.textBoxPubHash.Location = new System.Drawing.Point(159, 123);
+            this.textBoxPubHash.Location = new System.Drawing.Point(162, 160);
             this.textBoxPubHash.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxPubHash.Name = "textBoxPubHash";
             this.textBoxPubHash.Size = new System.Drawing.Size(834, 26);
-            this.textBoxPubHash.TabIndex = 5;
+            this.textBoxPubHash.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 58);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 20);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Type";
+            // 
+            // textBoxType
+            // 
+            this.textBoxType.Location = new System.Drawing.Point(162, 54);
+            this.textBoxType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxType.Name = "textBoxType";
+            this.textBoxType.ReadOnly = true;
+            this.textBoxType.Size = new System.Drawing.Size(834, 26);
+            this.textBoxType.TabIndex = 1;
             // 
             // FormKeyDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1023, 265);
+            this.ClientSize = new System.Drawing.Size(1023, 321);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBoxType);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxPubHash);
             this.Controls.Add(this.label3);
@@ -233,5 +256,7 @@
         private System.Windows.Forms.ToolStripMenuItem displayTransactionsToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxPubHash;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBoxType;
     }
 }

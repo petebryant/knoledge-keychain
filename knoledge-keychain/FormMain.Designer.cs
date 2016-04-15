@@ -37,8 +37,14 @@
             this.addressToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAddressKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newAddressToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fromScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.keysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearAllToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.listViewAddress = new System.Windows.Forms.ListView();
             this.columnAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -50,7 +56,7 @@
             this.columnPrivateKey = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnPublicKey = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnKeyAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.addKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.proofOfOwnershipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -91,7 +97,8 @@
             // utilitiesToolStripMenuItem
             // 
             this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.validateBase58ToolStripMenuItem});
+            this.validateBase58ToolStripMenuItem,
+            this.proofOfOwnershipToolStripMenuItem});
             this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
             this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(81, 29);
             this.utilitiesToolStripMenuItem.Text = "&Utilities";
@@ -99,7 +106,7 @@
             // validateBase58ToolStripMenuItem
             // 
             this.validateBase58ToolStripMenuItem.Name = "validateBase58ToolStripMenuItem";
-            this.validateBase58ToolStripMenuItem.Size = new System.Drawing.Size(220, 30);
+            this.validateBase58ToolStripMenuItem.Size = new System.Drawing.Size(253, 30);
             this.validateBase58ToolStripMenuItem.Text = "&Validate Base58";
             this.validateBase58ToolStripMenuItem.Click += new System.EventHandler(this.validateBase58ToolStripMenuItem_Click);
             // 
@@ -107,7 +114,10 @@
             // 
             this.addressToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addAddressKeyToolStripMenuItem,
-            this.newAddressToolStripMenuItem});
+            this.newAddressToolStripMenuItem,
+            this.fromScriptToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.clearAllToolStripMenuItem});
             this.addressToolStripMenuItem.Name = "addressToolStripMenuItem";
             this.addressToolStripMenuItem.Size = new System.Drawing.Size(89, 29);
             this.addressToolStripMenuItem.Text = "&Address";
@@ -126,21 +136,61 @@
             this.newAddressToolStripMenuItem.Text = "&New Address";
             this.newAddressToolStripMenuItem.Click += new System.EventHandler(this.newAddressToolStripMenuItem_Click);
             // 
+            // fromScriptToolStripMenuItem
+            // 
+            this.fromScriptToolStripMenuItem.Name = "fromScriptToolStripMenuItem";
+            this.fromScriptToolStripMenuItem.Size = new System.Drawing.Size(211, 30);
+            this.fromScriptToolStripMenuItem.Text = "From &Script";
+            this.fromScriptToolStripMenuItem.Click += new System.EventHandler(this.fromScriptToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(208, 6);
+            // 
+            // clearAllToolStripMenuItem
+            // 
+            this.clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
+            this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(211, 30);
+            this.clearAllToolStripMenuItem.Text = "&Clear All";
+            this.clearAllToolStripMenuItem.Click += new System.EventHandler(this.clearAllToolStripMenuItem_Click);
+            // 
             // keysToolStripMenuItem
             // 
             this.keysToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addKeyToolStripMenuItem,
-            this.newKeyToolStripMenuItem});
+            this.newKeyToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.clearAllToolStripMenuItem1});
             this.keysToolStripMenuItem.Name = "keysToolStripMenuItem";
             this.keysToolStripMenuItem.Size = new System.Drawing.Size(60, 29);
             this.keysToolStripMenuItem.Text = "&Keys";
             // 
+            // addKeyToolStripMenuItem
+            // 
+            this.addKeyToolStripMenuItem.Name = "addKeyToolStripMenuItem";
+            this.addKeyToolStripMenuItem.Size = new System.Drawing.Size(165, 30);
+            this.addKeyToolStripMenuItem.Text = "&Add Key";
+            this.addKeyToolStripMenuItem.Click += new System.EventHandler(this.addKeyToolStripMenuItem_Click);
+            // 
             // newKeyToolStripMenuItem
             // 
             this.newKeyToolStripMenuItem.Name = "newKeyToolStripMenuItem";
-            this.newKeyToolStripMenuItem.Size = new System.Drawing.Size(211, 30);
+            this.newKeyToolStripMenuItem.Size = new System.Drawing.Size(165, 30);
             this.newKeyToolStripMenuItem.Text = "&New Key";
             this.newKeyToolStripMenuItem.Click += new System.EventHandler(this.newKeyToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(162, 6);
+            // 
+            // clearAllToolStripMenuItem1
+            // 
+            this.clearAllToolStripMenuItem1.Name = "clearAllToolStripMenuItem1";
+            this.clearAllToolStripMenuItem1.Size = new System.Drawing.Size(165, 30);
+            this.clearAllToolStripMenuItem1.Text = "&Clear All";
+            this.clearAllToolStripMenuItem1.Click += new System.EventHandler(this.clearAllToolStripMenuItem1_Click);
             // 
             // listViewAddress
             // 
@@ -242,12 +292,12 @@
             this.columnKeyAddress.Text = "Address";
             this.columnKeyAddress.Width = 400;
             // 
-            // addKeyToolStripMenuItem
+            // proofOfOwnershipToolStripMenuItem
             // 
-            this.addKeyToolStripMenuItem.Name = "addKeyToolStripMenuItem";
-            this.addKeyToolStripMenuItem.Size = new System.Drawing.Size(211, 30);
-            this.addKeyToolStripMenuItem.Text = "&Add Key";
-            this.addKeyToolStripMenuItem.Click += new System.EventHandler(this.addKeyToolStripMenuItem_Click);
+            this.proofOfOwnershipToolStripMenuItem.Name = "proofOfOwnershipToolStripMenuItem";
+            this.proofOfOwnershipToolStripMenuItem.Size = new System.Drawing.Size(253, 30);
+            this.proofOfOwnershipToolStripMenuItem.Text = "&Proof of Ownership";
+            this.proofOfOwnershipToolStripMenuItem.Click += new System.EventHandler(this.proofOfOwnershipToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -294,6 +344,12 @@
         private System.Windows.Forms.ColumnHeader columnPublicKey;
         private System.Windows.Forms.ColumnHeader columnKeyAddress;
         private System.Windows.Forms.ToolStripMenuItem addKeyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem clearAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem clearAllToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem fromScriptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem proofOfOwnershipToolStripMenuItem;
     }
 }
 

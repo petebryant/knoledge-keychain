@@ -33,6 +33,13 @@ namespace knoledge_keychain
             Address = PubKey.ScriptPubKey.GetDestinationAddress(_network);
         }
 
+        public KeyPair(BitcoinExtKey privateKey)
+        {
+            PrivateKey = privateKey;
+            PubKey = PrivateKey.ExtKey.Neuter().GetWif(_network);
+            Address = PubKey.ScriptPubKey.GetDestinationAddress(_network);
+        }
+
         public KeyPair(ExtPubKey pubKey)
         {
             PubKey = new BitcoinExtPubKey(pubKey, Network.TestNet);

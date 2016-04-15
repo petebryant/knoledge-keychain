@@ -67,7 +67,7 @@ namespace knoledge_keychain
             }
             else if (contextMenuStrip.SourceControl == listViewKey)
             {
-                var key = listViewKey.SelectedItems[0].Tag as KeyPair;
+                var key = listViewKey.SelectedItems[0].Tag;
 
                 if (key != null)
                 {
@@ -141,27 +141,68 @@ namespace knoledge_keychain
                 {
                     KeyPair keyPair = null;
                     Type type = form.Result.GetType();
+                    ListViewItem lvi = new ListViewItem();
 
                     switch (type.ToString())
                     {
                         case "NBitcoin.ExtPubKey":
                             ExtPubKey pubKey = form.Result as ExtPubKey;
                             keyPair = new KeyPair(pubKey);
+                            lvi.Text = keyPair.PrivateKeyString;
+                            lvi.Tag = keyPair;
+                            lvi.SubItems.AddRange( new []{ keyPair.PubKey.ToString(), keyPair.Address.ToString() });
+                            listViewKey.Items.Add(lvi);
+                            break;
+                        case "NBitcoin.BitcoinSecret":
+                            BitcoinSecret secret = form.Result as BitcoinSecret;
+                            lvi.Text = secret.ToWif();
+                            lvi.Tag = secret;
+                            lvi.SubItems.AddRange(new[] { "unknown", secret.GetAddress().ToString() });
+                            listViewKey.Items.Add(lvi);
+                            break;
+                        case "NBitcoin.BitcoinExtKey":
+                            BitcoinExtKey extKey = form.Result as BitcoinExtKey;
+                            keyPair = new KeyPair(extKey);
+                            lvi.Text = keyPair.PrivateKeyString;
+                            lvi.Tag = keyPair;
+                            lvi.SubItems.AddRange( new []{ keyPair.PubKey.ToString(), keyPair.Address.ToString() });
+                            listViewKey.Items.Add(lvi);
                             break;
                     }
-
-                    
-
-                    if (keyPair == null) return;
-
-                    string[] subItems = { keyPair.PubKey.ToString(), keyPair.Address.ToString() };
-
-                    ListViewItem lvi = new ListViewItem();
-                    lvi.Text = keyPair.PrivateKeyString;
-                    lvi.Tag = keyPair;
-                    lvi.SubItems.AddRange(subItems);
-                    listViewKey.Items.Add(lvi);
                 }
+            }
+        }
+
+        private void clearAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listViewAddress.Items.Clear();
+        }
+
+        private void clearAllToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            listViewKey.Items.Clear();
+        }
+
+        private void fromScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormAddressFromScript form = new FormAddressFromScript())
+            {
+                if (form.ShowDialog() == DialogResult.OK && form.Result != null)
+                {
+                    ListViewItem lvi = new ListViewItem();
+                    lvi.Text = form.Result.ToString();
+                    lvi.Tag = form.Result;
+                    listViewAddress.Items.Add(lvi);
+                }
+            }
+            
+        }
+
+        private void proofOfOwnershipToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormProof form = new FormProof())
+            {
+                form.ShowDialog();
             }
         }
     }

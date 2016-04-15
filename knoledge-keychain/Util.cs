@@ -140,6 +140,19 @@ namespace knoledge_keychain
 
             return null;
         }
+        public static BitcoinAddress BitcoinAddressFomScriptPubKey(string script)
+        {
+            try
+            {
+                Script scriptPubKey = new Script(script);
+                KeyId hash = (KeyId)scriptPubKey.GetDestination();
+                BitcoinAddress address = new BitcoinAddress(hash,  Network.TestNet);
+                return address;
+            }
+            catch { }
+
+            return null;
+        }
     }
 }
 
