@@ -107,6 +107,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox);
             this.Name = "FormQRCode";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "QR Code";
             this.Load += new System.EventHandler(this.FormQRCode_Load);

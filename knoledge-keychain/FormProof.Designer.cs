@@ -147,6 +147,7 @@
             this.Controls.Add(this.textBoxBase58);
             this.Controls.Add(this.label1);
             this.Name = "FormProof";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Proof of Ownership";
             this.Load += new System.EventHandler(this.FormProof_Load);
