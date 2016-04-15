@@ -56,7 +56,7 @@
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(120, 20);
-            this.label5.TabIndex = 10;
+            this.label5.TabIndex = 11;
             this.label5.Text = "Bitcoin Address";
             // 
             // textBoxBitcoinAddress
@@ -65,7 +65,7 @@
             this.textBoxBitcoinAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxBitcoinAddress.Name = "textBoxBitcoinAddress";
             this.textBoxBitcoinAddress.Size = new System.Drawing.Size(834, 26);
-            this.textBoxBitcoinAddress.TabIndex = 11;
+            this.textBoxBitcoinAddress.TabIndex = 12;
             // 
             // label4
             // 
@@ -74,7 +74,7 @@
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(81, 20);
-            this.label4.TabIndex = 4;
+            this.label4.TabIndex = 5;
             this.label4.Text = "Public Key";
             // 
             // textBoxPubKey
@@ -83,7 +83,7 @@
             this.textBoxPubKey.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxPubKey.Name = "textBoxPubKey";
             this.textBoxPubKey.Size = new System.Drawing.Size(834, 26);
-            this.textBoxPubKey.TabIndex = 5;
+            this.textBoxPubKey.TabIndex = 6;
             // 
             // label2
             // 
@@ -92,7 +92,7 @@
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 20);
-            this.label2.TabIndex = 8;
+            this.label2.TabIndex = 9;
             this.label2.Text = "Script Pub Key";
             // 
             // textBoxScriptPubKey
@@ -101,7 +101,7 @@
             this.textBoxScriptPubKey.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxScriptPubKey.Name = "textBoxScriptPubKey";
             this.textBoxScriptPubKey.Size = new System.Drawing.Size(834, 26);
-            this.textBoxScriptPubKey.TabIndex = 9;
+            this.textBoxScriptPubKey.TabIndex = 10;
             // 
             // label3
             // 
@@ -110,7 +110,7 @@
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 20);
-            this.label3.TabIndex = 2;
+            this.label3.TabIndex = 3;
             this.label3.Text = "Private Key";
             // 
             // textBoxPrivateKey
@@ -119,7 +119,7 @@
             this.textBoxPrivateKey.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxPrivateKey.Name = "textBoxPrivateKey";
             this.textBoxPrivateKey.Size = new System.Drawing.Size(834, 26);
-            this.textBoxPrivateKey.TabIndex = 3;
+            this.textBoxPrivateKey.TabIndex = 4;
             // 
             // menuStrip
             // 
@@ -130,7 +130,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1023, 33);
-            this.menuStrip.TabIndex = 13;
+            this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
@@ -178,7 +178,7 @@
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(133, 20);
-            this.label1.TabIndex = 6;
+            this.label1.TabIndex = 7;
             this.label1.Text = "Public Key (Hash)";
             // 
             // textBoxPubHash
@@ -187,7 +187,7 @@
             this.textBoxPubHash.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxPubHash.Name = "textBoxPubHash";
             this.textBoxPubHash.Size = new System.Drawing.Size(834, 26);
-            this.textBoxPubHash.TabIndex = 7;
+            this.textBoxPubHash.TabIndex = 8;
             // 
             // label6
             // 
@@ -196,7 +196,7 @@
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 20);
-            this.label6.TabIndex = 0;
+            this.label6.TabIndex = 1;
             this.label6.Text = "Type";
             // 
             // textBoxType
@@ -206,7 +206,7 @@
             this.textBoxType.Name = "textBoxType";
             this.textBoxType.ReadOnly = true;
             this.textBoxType.Size = new System.Drawing.Size(834, 26);
-            this.textBoxType.TabIndex = 1;
+            this.textBoxType.TabIndex = 2;
             // 
             // FormKeyDetails
             // 

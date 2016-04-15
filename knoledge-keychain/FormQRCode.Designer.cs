@@ -52,7 +52,7 @@
             this.label1.Location = new System.Drawing.Point(63, 380);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 20);
-            this.label1.TabIndex = 14;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Address: ";
             // 
             // labelAddress
@@ -62,7 +62,7 @@
             this.labelAddress.Location = new System.Drawing.Point(146, 380);
             this.labelAddress.Name = "labelAddress";
             this.labelAddress.Size = new System.Drawing.Size(178, 20);
-            this.labelAddress.TabIndex = 15;
+            this.labelAddress.TabIndex = 1;
             this.labelAddress.Text = "address goes here....";
             // 
             // buttonAddress
@@ -70,7 +70,7 @@
             this.buttonAddress.Location = new System.Drawing.Point(84, 453);
             this.buttonAddress.Name = "buttonAddress";
             this.buttonAddress.Size = new System.Drawing.Size(123, 41);
-            this.buttonAddress.TabIndex = 16;
+            this.buttonAddress.TabIndex = 2;
             this.buttonAddress.Text = "Copy Address";
             this.buttonAddress.UseVisualStyleBackColor = true;
             this.buttonAddress.Click += new System.EventHandler(this.buttonAddress_Click);
@@ -80,7 +80,7 @@
             this.buttonSave.Location = new System.Drawing.Point(218, 453);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(123, 41);
-            this.buttonSave.TabIndex = 17;
+            this.buttonSave.TabIndex = 3;
             this.buttonSave.Text = "Save Image";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -90,7 +90,7 @@
             this.buttonClose.Location = new System.Drawing.Point(347, 453);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(123, 41);
-            this.buttonClose.TabIndex = 18;
+            this.buttonClose.TabIndex = 4;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);

@@ -46,7 +46,7 @@
             this.label1.Location = new System.Drawing.Point(29, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(120, 40);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 1;
             this.label1.Text = "Bitcoin Secret / \r\nAddress";
             // 
             // textBoxBase58
@@ -54,7 +54,7 @@
             this.textBoxBase58.Location = new System.Drawing.Point(143, 88);
             this.textBoxBase58.Name = "textBoxBase58";
             this.textBoxBase58.Size = new System.Drawing.Size(690, 26);
-            this.textBoxBase58.TabIndex = 1;
+            this.textBoxBase58.TabIndex = 2;
             this.textBoxBase58.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // buttonCreate
@@ -62,7 +62,7 @@
             this.buttonCreate.Location = new System.Drawing.Point(677, 226);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(75, 36);
-            this.buttonCreate.TabIndex = 10;
+            this.buttonCreate.TabIndex = 8;
             this.buttonCreate.Text = "Create";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
@@ -72,7 +72,7 @@
             this.textBoxMessage.Location = new System.Drawing.Point(143, 131);
             this.textBoxMessage.Name = "textBoxMessage";
             this.textBoxMessage.Size = new System.Drawing.Size(690, 26);
-            this.textBoxMessage.TabIndex = 5;
+            this.textBoxMessage.TabIndex = 4;
             this.textBoxMessage.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // label2
@@ -81,7 +81,7 @@
             this.label2.Location = new System.Drawing.Point(29, 134);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 20);
-            this.label2.TabIndex = 4;
+            this.label2.TabIndex = 3;
             this.label2.Text = "Message";
             // 
             // textBoxSig
@@ -89,7 +89,7 @@
             this.textBoxSig.Location = new System.Drawing.Point(143, 175);
             this.textBoxSig.Name = "textBoxSig";
             this.textBoxSig.Size = new System.Drawing.Size(690, 26);
-            this.textBoxSig.TabIndex = 7;
+            this.textBoxSig.TabIndex = 6;
             this.textBoxSig.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // label4
@@ -98,7 +98,7 @@
             this.label4.Location = new System.Drawing.Point(29, 175);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 20);
-            this.label4.TabIndex = 6;
+            this.label4.TabIndex = 5;
             this.label4.Text = "Signature";
             // 
             // buttonVerify
@@ -106,7 +106,7 @@
             this.buttonVerify.Location = new System.Drawing.Point(758, 226);
             this.buttonVerify.Name = "buttonVerify";
             this.buttonVerify.Size = new System.Drawing.Size(75, 36);
-            this.buttonVerify.TabIndex = 11;
+            this.buttonVerify.TabIndex = 9;
             this.buttonVerify.Text = "Verify";
             this.buttonVerify.UseVisualStyleBackColor = true;
             this.buttonVerify.Click += new System.EventHandler(this.buttonVerify_Click);
@@ -116,7 +116,7 @@
             this.buttonClear.Location = new System.Drawing.Point(596, 226);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 36);
-            this.buttonClear.TabIndex = 9;
+            this.buttonClear.TabIndex = 7;
             this.buttonClear.Text = "Clear";
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
@@ -127,7 +127,7 @@
             this.label5.Location = new System.Drawing.Point(190, 25);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(558, 40);
-            this.label5.TabIndex = 8;
+            this.label5.TabIndex = 0;
             this.label5.Text = "Enter a Base58 Bitcoin Secret or Address, the Message and the Signature \r\nof the " +
     "signed message,  or click [Create] to create detailas that can be verified.\r\n";
             // 
