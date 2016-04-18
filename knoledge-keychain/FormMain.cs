@@ -15,6 +15,8 @@ namespace knoledge_keychain
 {
     public partial class FormMain : Form
     {
+        ExtPubKey _ceoPubkey;
+
         public FormMain()
         {
             InitializeComponent();
@@ -78,6 +80,19 @@ namespace knoledge_keychain
                     }
                 }
             }
+            else if (contextMenuStrip.SourceControl == treeViewDrived)
+            {
+                var key = treeViewDrived.SelectedNode.Tag;
+
+                if (key != null)
+                {
+                    using (FormKeyDetails form = new FormKeyDetails())
+                    {
+                        form.Key = key;
+                        form.ShowDialog();
+                    }
+                }
+            }
         }
 
         private void listView_MouseClick(object sender, MouseEventArgs e)
@@ -107,6 +122,13 @@ namespace knoledge_keychain
                 else if (menu.SourceControl == listViewKey && listViewKey.SelectedItems.Count <= 0)
                 {
                     e.Cancel = true;
+                }
+                else if (menu.SourceControl == treeViewDrived) 
+                {
+                    if (treeViewDrived.SelectedNode == null)
+                        e.Cancel = true;
+
+                    recoverParentToolStripMenuItem.Enabled = (treeViewDrived.SelectedNode.Nodes.Count <= 0);
                 }
             }
         }
@@ -204,6 +226,64 @@ namespace knoledge_keychain
             {
                 form.ShowDialog();
             }
+        }
+
+        private void findVanityAddressToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormVanityAddress form = new FormVanityAddress())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void derivedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //unsecure key hierarchy
+            ExtKey ceoKey = new ExtKey();
+            _ceoPubkey = ceoKey.Neuter();
+            TreeNode ceoNode = new TreeNode();
+            ceoNode.Text = "CEO: " + ceoKey.ToString(Network.TestNet);
+            ceoNode.Tag = ceoKey;
+
+            ExtKey cfoKey = ceoKey.Derive(0, hardened: false);
+            TreeNode cfoNode = new TreeNode();
+            cfoNode.Text = "CFO: " + cfoKey.ToString(Network.TestNet);
+            cfoNode.Tag = cfoKey;
+            ceoNode.Nodes.Add(cfoNode);
+
+            ExtKey ctoKey = ceoKey.Derive(1, hardened: false);
+            TreeNode ctoNode = new TreeNode();
+            ctoNode.Text = "CTO: " + ctoKey.ToString(Network.TestNet);
+            ctoNode.Tag = ctoKey;
+            ceoNode.Nodes.Add(ctoNode);
+
+            treeViewDrived.Nodes.Add(ceoNode);
+        }
+
+        private void treeViewDrived_MouseClick(object sender, MouseEventArgs e)
+        {
+            TreeView treeView = sender as TreeView;
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                TreeNode item = treeView.GetNodeAt(e.X, e.Y);
+                if (item != null)
+                {
+                    treeView.SelectedNode = item;
+                    contextMenuStrip.Show(treeView, e.Location);
+                }
+            }
+        }
+
+        private void recoverParentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExtKey key = treeViewDrived.SelectedNode.Tag as ExtKey;
+
+            if (key == null) return;
+
+            //Recover ceo key with accounting private key and ceo public key 
+            ExtKey recovered = key.GetParentExtKey(_ceoPubkey);
+
+            MessageBox.Show("CEO: " + recovered.ToString(Network.TestNet));
         }
     }
 }

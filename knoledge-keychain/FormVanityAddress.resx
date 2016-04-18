@@ -117,10 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>173, 17</value>
-  </metadata>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>Based on TestNet so addresses are prefixed with "m" or "n". 
+
+NOTE: As this is a demo it converts addresses tro uppercase to speed up the 
+matching process.
+
+This is very slow using managed .Net as the public keys are random. Therefore the 
+comparision is not iterating through a sequence of values, it is waiting 
+for the program to generate a random sequence that matches. This work
+should be done using dedicate GPU/Risk hardware and native code.
+
+Addresses are Base58, which is Base64 without the 0 (number zero), 
+O (capital o), l (lower L), I (capital i), and the symbols “\ +” and “/”.
+
+Length 	Pattern		Frequency	Search Time
+1	mK		1 in 58 keys	hundreths of a sceond
+2	mKn		1 in 3,364		tenths of a second
+3	mKno		1 in 195,000	&lt; 10 minutes
+4	mKnoL		1 in 11 million	...
+5	mKnoLe		1 in 656 million	
+6	mKnoLed		1 in 38 billion	
+7	mknoLedg	1 in 2.2 trillion	
+
+Timings taken using a i7 4650U, 8GB RAM, 6430bit Windows 10.
+Implemented using C# .Net 4.5 keys are generated using 2 threads. </value>
+  </data>
 </root>
