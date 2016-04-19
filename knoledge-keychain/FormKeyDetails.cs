@@ -31,6 +31,7 @@ namespace knoledge_keychain
             string hash = "";
             string script = "";
             string base58Type = "";
+            BitcoinAddress bitcoinAddress;
 
             Type type = Key.GetType();
 
@@ -52,11 +53,18 @@ namespace knoledge_keychain
                 case "NBitcoin.BitcoinSecret":
                     BitcoinSecret secret = Key as BitcoinSecret;
                     privateKey = secret.ToWif();
-                    BitcoinAddress bitcoinAddress = secret.GetAddress();
+                    bitcoinAddress = secret.GetAddress();
                     address = bitcoinAddress.ToString();
                     hash = secret.PubKey.Hash.ToString();
                     script = bitcoinAddress.ScriptPubKey.ToString();
                     base58Type = secret.Type.ToString();
+                    break;
+                case "NBitcoin.ExtKey":
+                    ExtKey extKey = Key as ExtKey;
+                    privateKey = extKey.ToString(Network.TestNet);
+                    bitcoinAddress = extKey.ScriptPubKey.GetDestinationAddress(Network.TestNet);
+                    address = bitcoinAddress.ToString();
+                    script = bitcoinAddress.ScriptPubKey.ToString();
                     break;
 
             }

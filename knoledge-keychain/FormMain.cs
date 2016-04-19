@@ -126,9 +126,17 @@ namespace knoledge_keychain
                 else if (menu.SourceControl == treeViewDrived) 
                 {
                     if (treeViewDrived.SelectedNode == null)
+                    {
                         e.Cancel = true;
-
-                    recoverParentToolStripMenuItem.Enabled = (treeViewDrived.SelectedNode.Nodes.Count <= 0);
+                        recoverParentToolStripMenuItem.Enabled = false;
+                        deriveChildToolStripMenuItem.Enabled = false;
+                    }
+                    else
+                    {
+                        recoverParentToolStripMenuItem.Enabled = true;
+                        deriveChildToolStripMenuItem.Enabled = true;
+                    }
+                    
                 }
             }
         }
@@ -242,20 +250,10 @@ namespace knoledge_keychain
             ExtKey ceoKey = new ExtKey();
             _ceoPubkey = ceoKey.Neuter();
             TreeNode ceoNode = new TreeNode();
-            ceoNode.Text = "CEO: " + ceoKey.ToString(Network.TestNet);
+            ceoNode.Text = "Top: " + ceoKey.ToString(Network.TestNet);
             ceoNode.Tag = ceoKey;
 
-            ExtKey cfoKey = ceoKey.Derive(0, hardened: false);
-            TreeNode cfoNode = new TreeNode();
-            cfoNode.Text = "CFO: " + cfoKey.ToString(Network.TestNet);
-            cfoNode.Tag = cfoKey;
-            ceoNode.Nodes.Add(cfoNode);
 
-            ExtKey ctoKey = ceoKey.Derive(1, hardened: false);
-            TreeNode ctoNode = new TreeNode();
-            ctoNode.Text = "CTO: " + ctoKey.ToString(Network.TestNet);
-            ctoNode.Tag = ctoKey;
-            ceoNode.Nodes.Add(ctoNode);
 
             treeViewDrived.Nodes.Add(ceoNode);
         }
@@ -276,14 +274,63 @@ namespace knoledge_keychain
 
         private void recoverParentToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            TreeNode parentNode = treeViewDrived.SelectedNode;
+            ExtKey parentKey = parentNode.Parent.Tag as ExtKey;
+            ExtPubKey pubkey = parentKey.Neuter();
             ExtKey key = treeViewDrived.SelectedNode.Tag as ExtKey;
 
             if (key == null) return;
 
             //Recover ceo key with accounting private key and ceo public key 
-            ExtKey recovered = key.GetParentExtKey(_ceoPubkey);
+            try
+            {
+                ExtKey recovered = key.GetParentExtKey(pubkey);
 
-            MessageBox.Show("CEO: " + recovered.ToString(Network.TestNet));
+                MessageBox.Show("Parent: " + recovered.ToString(Network.TestNet));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void deriveChildToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TreeNode parentNode = treeViewDrived.SelectedNode;
+            ExtKey key = treeViewDrived.SelectedNode.Tag as ExtKey;
+            ExtKey cfoKey = key.Derive(parentNode.Nodes.Count, hardened: false);
+            TreeNode node = new TreeNode();
+            node.Text = parentNode.Nodes.Count + " : " + cfoKey.ToString(Network.TestNet);
+            node.Tag = cfoKey;
+            parentNode.Nodes.Add(node);
+        }
+
+        private void deriveHardenedChildToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TreeNode parentNode = treeViewDrived.SelectedNode;
+            ExtKey key = treeViewDrived.SelectedNode.Tag as ExtKey;
+            ExtKey cfoKey = key.Derive(parentNode.Nodes.Count, hardened: true);
+            TreeNode node = new TreeNode();
+            node.Text = parentNode.Nodes.Count + " : " + cfoKey.ToString(Network.TestNet);
+            node.Tag = cfoKey;
+            parentNode.Nodes.Add(node);
+        }
+
+        private void mnemonicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormMnemonic form = new FormMnemonic())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void encryptDecryptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormCrypt form = new FormCrypt())
+            {
+                form.ShowDialog();
+            }
         }
     }
 }

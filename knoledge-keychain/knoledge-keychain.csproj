@@ -82,6 +82,12 @@
     <Compile Include="FormAddAddress.Designer.cs">
       <DependentUpon>FormAddAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCrypt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCrypt.Designer.cs">
+      <DependentUpon>FormCrypt.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormKeyDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,12 @@
     </Compile>
     <Compile Include="FormAddressDetails.Designer.cs">
       <DependentUpon>FormAddressDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMnemonic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMnemonic.Designer.cs">
+      <DependentUpon>FormMnemonic.cs</DependentUpon>
     </Compile>
     <Compile Include="FormProof.cs">
       <SubType>Form</SubType>
@@ -139,11 +151,17 @@
     <EmbeddedResource Include="FormAddAddress.resx">
       <DependentUpon>FormAddAddress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormCrypt.resx">
+      <DependentUpon>FormCrypt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormKeyDetails.resx">
       <DependentUpon>FormKeyDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAddressDetails.resx">
       <DependentUpon>FormAddressDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMnemonic.resx">
+      <DependentUpon>FormMnemonic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProof.resx">
       <DependentUpon>FormProof.cs</DependentUpon>

@@ -22,3 +22,15 @@ MESSAGE = A sample message to sign
 SIGNATURE = HzvwB2ylneE6+aet+S3fF7syCcaFRt79hreG5M8ADvVHfTbr92dj84aDq6iGoYgy4D08fUgh7EiLirQn4K4+rAE=
 
 
+HDRoot = cQUJ5yUVEJ8jYck7mdS4zGgT64DEx7PVdKmuujUVWtQkoBmtvuWx
+Password = my password
+Wordlist = captain junk prepare armed shoulder add nurse rose army cargo cruel sibling
+Wordcount = 12
+Mnemonic = English
+
+
+Sccret = cNXJ5s3EdRLrcwzsu41UARYh1c59tVcnbekjABGxytGkFzgFfdj6
+Password = password
+Encrpted = 6PYNmFkd1iw7JtefDaDzLeGQ5P5zCN44WJ6mfefmTjUV9NXBTHiTcHJZ7D
+
+
