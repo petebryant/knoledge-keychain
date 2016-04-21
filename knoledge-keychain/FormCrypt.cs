@@ -34,30 +34,42 @@ namespace knoledge_keychain
 
             if (string.IsNullOrEmpty(textBoxEncrypted.Text))
             {
-                _result = Util.Interpret(textBoxSecret.Text);
+                using (new HourGlass())
+                {
+                    _result = Util.Interpret(textBoxSecret.Text);
+                }
 
                 if (_result == null || !(_result is BitcoinSecret))
                 {
-                    MessageBox.Show("Unrecognized or invalid key.");
+                    MessageBox.Show(this, "Unrecognized or invalid key.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                BitcoinSecret secret = _result as BitcoinSecret;
-                BitcoinEncryptedSecret encrypted = secret.Encrypt(textBoxPassword.Text);
-                textBoxEncrypted.Text = encrypted.ToString();
+                using (new HourGlass())
+                {
+                    BitcoinSecret secret = _result as BitcoinSecret;
+                    BitcoinEncryptedSecret encrypted = secret.Encrypt(textBoxPassword.Text);
+                    textBoxEncrypted.Text = encrypted.ToString();
+                }
             }
             else if (string.IsNullOrEmpty(textBoxSecret.Text))
             {
-                _result = Util.Interpret(textBoxEncrypted.Text);
+                using (new HourGlass())
+                {
+                    _result = Util.Interpret(textBoxEncrypted.Text);
+                }
 
                 if (_result == null || !(_result is BitcoinEncryptedSecretNoEC))
                 {
-                    MessageBox.Show("Unrecognized or invalid key.");
+                    MessageBox.Show(this, "Unrecognized or invalid key.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                BitcoinEncryptedSecretNoEC encEC = _result as BitcoinEncryptedSecretNoEC;
-                textBoxSecret.Text = encEC.GetKey(textBoxPassword.Text).GetBitcoinSecret(Network.TestNet).ToString();
+                using (new HourGlass())
+                {
+                    BitcoinEncryptedSecretNoEC encEC = _result as BitcoinEncryptedSecretNoEC;
+                    textBoxSecret.Text = encEC.GetKey(textBoxPassword.Text).GetBitcoinSecret(Network.TestNet).ToString();
+                }
             }
         }
     }

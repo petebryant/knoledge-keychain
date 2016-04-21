@@ -26,7 +26,11 @@ namespace knoledge_keychain
 
         private async void buttonFind_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxVanity.Text)) return;
+            if (string.IsNullOrEmpty(textBoxVanity.Text))
+            {
+                MessageBox.Show(this, "Enter a Vanity text.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             _exitLoop = false;
             _count = 0;
@@ -149,6 +153,11 @@ namespace knoledge_keychain
                 BeginInvoke(method);
             else
                 method.Invoke();
+        }
+
+        private void FormVanityAddress_Load(object sender, EventArgs e)
+        {
+            textBoxVanity.Focus();
         }
     }
 }

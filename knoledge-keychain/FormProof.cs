@@ -28,16 +28,19 @@ namespace knoledge_keychain
         {
             try
             {
-                key = new Key();
-                secret = key.GetBitcoinSecret(Network.TestNet);
-                address = secret.GetAddress();
-                string base58String = secret.ToWif();
-                msg = "A sample message to sign";
-                sig = secret.PrivateKey.SignMessage(msg);
+                using (new HourGlass())
+                {
+                    key = new Key();
+                    secret = key.GetBitcoinSecret(Network.TestNet);
+                    address = secret.GetAddress();
+                    string base58String = secret.ToWif();
+                    msg = "A sample message to sign";
+                    sig = secret.PrivateKey.SignMessage(msg);
 
-                textBoxBase58.Text = base58String;
-                textBoxMessage.Text = msg;
-                textBoxSig.Text = sig;
+                    textBoxBase58.Text = base58String;
+                    textBoxMessage.Text = msg;
+                    textBoxSig.Text = sig;
+                }
 
             }
             catch (Exception ex)
@@ -50,20 +53,23 @@ namespace knoledge_keychain
         {
             try
             {
-                var fromBase58 = Util.Interpret(textBoxBase58.Text);
-
-                if (fromBase58 is BitcoinSecret)
+                using (new HourGlass())
                 {
-                    secret = new BitcoinSecret(textBoxBase58.Text, Network.TestNet);
-                    address = secret.GetAddress();
-                }
-                else
-                {
-                    address = new BitcoinAddress(textBoxBase58.Text);
-                }
+                    var fromBase58 = Util.Interpret(textBoxBase58.Text);
 
-                sig = textBoxSig.Text;
-                msg = textBoxMessage.Text;
+                    if (fromBase58 is BitcoinSecret)
+                    {
+                        secret = new BitcoinSecret(textBoxBase58.Text, Network.TestNet);
+                        address = secret.GetAddress();
+                    }
+                    else
+                    {
+                        address = new BitcoinAddress(textBoxBase58.Text);
+                    }
+
+                    sig = textBoxSig.Text;
+                    msg = textBoxMessage.Text;
+                }
 
                 string valid = address.VerifyMessage(msg, sig).ToString();
                 MessageBox.Show(this, valid, "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Information);

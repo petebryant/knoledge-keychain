@@ -106,6 +106,12 @@
     <Compile Include="FormMnemonic.Designer.cs">
       <DependentUpon>FormMnemonic.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPassphraseCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPassphraseCode.Designer.cs">
+      <DependentUpon>FormPassphraseCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormProof.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMnemonic.resx">
       <DependentUpon>FormMnemonic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPassphraseCode.resx">
+      <DependentUpon>FormPassphraseCode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProof.resx">
       <DependentUpon>FormProof.cs</DependentUpon>

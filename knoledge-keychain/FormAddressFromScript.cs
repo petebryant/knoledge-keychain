@@ -24,15 +24,18 @@ namespace knoledge_keychain
         {
             if (string.IsNullOrEmpty(textBoxScript.Text))
             {
-                MessageBox.Show("Enter an script.");
+                MessageBox.Show(this, "Enter an script.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            Result = Util.BitcoinAddressFomScriptPubKey(textBoxScript.Text);
+            using (new HourGlass())
+            {
+                Result = Util.BitcoinAddressFomScriptPubKey(textBoxScript.Text);
+            }
 
             if (Result == null)
             {
-                MessageBox.Show("Unrecognized or invalid script.");
+                MessageBox.Show(this, "Unrecognized or invalid script.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

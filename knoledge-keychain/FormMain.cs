@@ -115,6 +115,10 @@ namespace knoledge_keychain
 
             if (menu != null)
             {
+                recoverParentToolStripMenuItem.Enabled = false;
+                deriveChildToolStripMenuItem.Enabled = false;
+                deriveHardenedChildToolStripMenuItem.Enabled = false;
+
                 if (menu.SourceControl == listViewAddress && listViewAddress.SelectedItems.Count <= 0)
                 {
                     e.Cancel = true;
@@ -128,13 +132,12 @@ namespace knoledge_keychain
                     if (treeViewDrived.SelectedNode == null)
                     {
                         e.Cancel = true;
-                        recoverParentToolStripMenuItem.Enabled = false;
-                        deriveChildToolStripMenuItem.Enabled = false;
                     }
                     else
                     {
                         recoverParentToolStripMenuItem.Enabled = true;
                         deriveChildToolStripMenuItem.Enabled = true;
+                        deriveHardenedChildToolStripMenuItem.Enabled = true;
                     }
                     
                 }
@@ -205,12 +208,12 @@ namespace knoledge_keychain
 
         private void clearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            listViewAddress.Items.Clear();
-        }
-
-        private void clearAllToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            listViewKey.Items.Clear();
+            using (new HourGlass())
+            {
+                listViewAddress.Items.Clear();
+                listViewKey.Items.Clear();
+                treeViewDrived.Nodes.Clear();
+            }
         }
 
         private void fromScriptToolStripMenuItem_Click(object sender, EventArgs e)
@@ -246,16 +249,17 @@ namespace knoledge_keychain
 
         private void derivedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //unsecure key hierarchy
-            ExtKey ceoKey = new ExtKey();
-            _ceoPubkey = ceoKey.Neuter();
-            TreeNode ceoNode = new TreeNode();
-            ceoNode.Text = "Top: " + ceoKey.ToString(Network.TestNet);
-            ceoNode.Tag = ceoKey;
+            using (new HourGlass())
+            {
+                //unsecure key hierarchy
+                ExtKey ceoKey = new ExtKey();
+                _ceoPubkey = ceoKey.Neuter();
+                TreeNode ceoNode = new TreeNode();
+                ceoNode.Text = "Top: " + ceoKey.ToString(Network.TestNet);
+                ceoNode.Tag = ceoKey;
 
-
-
-            treeViewDrived.Nodes.Add(ceoNode);
+                treeViewDrived.Nodes.Add(ceoNode);
+            }
         }
 
         private void treeViewDrived_MouseClick(object sender, MouseEventArgs e)
@@ -274,47 +278,54 @@ namespace knoledge_keychain
 
         private void recoverParentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TreeNode parentNode = treeViewDrived.SelectedNode;
-            ExtKey parentKey = parentNode.Parent.Tag as ExtKey;
-            ExtPubKey pubkey = parentKey.Neuter();
-            ExtKey key = treeViewDrived.SelectedNode.Tag as ExtKey;
-
-            if (key == null) return;
-
-            //Recover ceo key with accounting private key and ceo public key 
-            try
+            using (new HourGlass())
             {
-                ExtKey recovered = key.GetParentExtKey(pubkey);
+                TreeNode parentNode = treeViewDrived.SelectedNode;
+                ExtKey parentKey = parentNode.Parent.Tag as ExtKey;
+                ExtPubKey pubkey = parentKey.Neuter();
+                ExtKey key = treeViewDrived.SelectedNode.Tag as ExtKey;
 
-                MessageBox.Show("Parent: " + recovered.ToString(Network.TestNet));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                if (key == null) return;
 
+                //Recover ceo key with accounting private key and ceo public key 
+                try
+                {
+                    ExtKey recovered = key.GetParentExtKey(pubkey);
+                    MessageBox.Show(this, "Parent: " + recovered.ToString(Network.TestNet), "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, ex.Message, "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void deriveChildToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TreeNode parentNode = treeViewDrived.SelectedNode;
-            ExtKey key = treeViewDrived.SelectedNode.Tag as ExtKey;
-            ExtKey cfoKey = key.Derive(parentNode.Nodes.Count, hardened: false);
-            TreeNode node = new TreeNode();
-            node.Text = parentNode.Nodes.Count + " : " + cfoKey.ToString(Network.TestNet);
-            node.Tag = cfoKey;
-            parentNode.Nodes.Add(node);
+            using (new HourGlass())
+            {
+                TreeNode parentNode = treeViewDrived.SelectedNode;
+                ExtKey key = treeViewDrived.SelectedNode.Tag as ExtKey;
+                ExtKey cfoKey = key.Derive(parentNode.Nodes.Count, hardened: false);
+                TreeNode node = new TreeNode();
+                node.Text = parentNode.Nodes.Count + " : " + cfoKey.ToString(Network.TestNet);
+                node.Tag = cfoKey;
+                parentNode.Nodes.Add(node);
+            }
         }
 
         private void deriveHardenedChildToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TreeNode parentNode = treeViewDrived.SelectedNode;
-            ExtKey key = treeViewDrived.SelectedNode.Tag as ExtKey;
-            ExtKey cfoKey = key.Derive(parentNode.Nodes.Count, hardened: true);
-            TreeNode node = new TreeNode();
-            node.Text = parentNode.Nodes.Count + " : " + cfoKey.ToString(Network.TestNet);
-            node.Tag = cfoKey;
-            parentNode.Nodes.Add(node);
+            using (new HourGlass())
+            {
+                TreeNode parentNode = treeViewDrived.SelectedNode;
+                ExtKey key = treeViewDrived.SelectedNode.Tag as ExtKey;
+                ExtKey cfoKey = key.Derive(parentNode.Nodes.Count, hardened: true);
+                TreeNode node = new TreeNode();
+                node.Text = parentNode.Nodes.Count + " : " + cfoKey.ToString(Network.TestNet);
+                node.Tag = cfoKey;
+                parentNode.Nodes.Add(node);
+            }
         }
 
         private void mnemonicToolStripMenuItem_Click(object sender, EventArgs e)
@@ -329,6 +340,14 @@ namespace knoledge_keychain
         {
             using (FormCrypt form = new FormCrypt())
             {
+                form.ShowDialog();
+            }
+        }
+
+        private void createPassphraseCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormPassphraseCode form = new FormPassphraseCode())
+            { 
                 form.ShowDialog();
             }
         }

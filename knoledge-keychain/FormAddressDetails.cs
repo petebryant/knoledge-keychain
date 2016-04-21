@@ -30,40 +30,43 @@ namespace knoledge_keychain
             string base58Type = "";
             Type type = Address.GetType();
 
-            switch (type.ToString())
+            using (new HourGlass())
             {
-                case "NBitcoin.BitcoinScriptAddress":
-                    BitcoinScriptAddress bsa = Address as BitcoinScriptAddress;
-                    bitcoinAddress = bsa.ToString();
-                    hash = bsa.Hash.ToString();
-                    script = bsa.ScriptPubKey.ToString();
-                    base58Type = bsa.Type.ToString();
-                    break;
-                case "NBitcoin.BitcoinAddress":
-                    BitcoinAddress ba = Address as BitcoinAddress;
-                    bitcoinAddress = ba.ToString();
-                    hash = ba.Hash.ToString();
-                    script = ba.ScriptPubKey.ToString();
-                    base58Type = ba.Type.ToString();
-                    break;
-                case "NBitcoin.Stealth.BitcoinStealthAddress":
-                    BitcoinStealthAddress stealth = Address as BitcoinStealthAddress;
-                    bitcoinAddress = stealth.ToString();
-                    hash = stealth.ScanPubKey.Hash.ToString();
-                    script = stealth.ScanPubKey.ScriptPubKey.ToString();
-                    base58Type = stealth.Type.ToString();
-                    break;
-                case "NBitcoin.BitcoinColoredAddress":
-                    BitcoinColoredAddress colored = Address as BitcoinColoredAddress;
-                    address = colored.ToString();
-                    bitcoinAddress = colored.Address.ToString();
-                    hash = colored.Address.Hash.ToString();
-                    script = colored.ScriptPubKey.ToString();
-                    base58Type = colored.Type.ToString();
-                    break;     
-                default:
-                    textBoxType.Text = type.ToString();
-                    break;
+                switch (type.ToString())
+                {
+                    case "NBitcoin.BitcoinScriptAddress":
+                        BitcoinScriptAddress bsa = Address as BitcoinScriptAddress;
+                        bitcoinAddress = bsa.ToString();
+                        hash = bsa.Hash.ToString();
+                        script = bsa.ScriptPubKey.ToString();
+                        base58Type = bsa.Type.ToString();
+                        break;
+                    case "NBitcoin.BitcoinAddress":
+                        BitcoinAddress ba = Address as BitcoinAddress;
+                        bitcoinAddress = ba.ToString();
+                        hash = ba.Hash.ToString();
+                        script = ba.ScriptPubKey.ToString();
+                        base58Type = ba.Type.ToString();
+                        break;
+                    case "NBitcoin.Stealth.BitcoinStealthAddress":
+                        BitcoinStealthAddress stealth = Address as BitcoinStealthAddress;
+                        bitcoinAddress = stealth.ToString();
+                        hash = stealth.ScanPubKey.Hash.ToString();
+                        script = stealth.ScanPubKey.ScriptPubKey.ToString();
+                        base58Type = stealth.Type.ToString();
+                        break;
+                    case "NBitcoin.BitcoinColoredAddress":
+                        BitcoinColoredAddress colored = Address as BitcoinColoredAddress;
+                        address = colored.ToString();
+                        bitcoinAddress = colored.Address.ToString();
+                        hash = colored.Address.Hash.ToString();
+                        script = colored.ScriptPubKey.ToString();
+                        base58Type = colored.Type.ToString();
+                        break;
+                    default:
+                        textBoxType.Text = type.ToString();
+                        break;
+                }
             }
 
             textBoxAddress.Text = address;

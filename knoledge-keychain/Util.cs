@@ -61,6 +61,8 @@ namespace knoledge_keychain
                     return new BitcoinExtKey(what, network);
                 case Base58Type.SECRET_KEY:                                 // Key.GetBitcoinSecret(Network.TestNet)
                     return new BitcoinSecret(what, network);
+                case Base58Type.PASSPHRASE_CODE:                            // BitcoinPassphraseCode("my secret", Network.TestNet, null);
+                    return new BitcoinPassphraseCode(what, network);
                 default:
                     return null;
             }

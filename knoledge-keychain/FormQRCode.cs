@@ -24,19 +24,26 @@ namespace knoledge_keychain
 
         private void FormQRCode_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Address)) return;
+            if (string.IsNullOrEmpty(Address))
+            {
+                MessageBox.Show(this, "Enter an Address.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            
+            using (new HourGlass())
+            {
+                QRCodeEncoder qr = new QRCodeEncoder();
+                qr.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.ALPHA_NUMERIC;
+                qr.QRCodeScale = 4;
+                qr.QRCodeVersion = 7;
+                qr.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;
 
-            QRCodeEncoder qr = new QRCodeEncoder();
-            qr.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.ALPHA_NUMERIC;
-            qr.QRCodeScale = 4;
-            qr.QRCodeVersion = 7;
-            qr.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;
+                string data = Address;
+                _image = qr.Encode(data);
 
-            string data = Address;
-            _image = qr.Encode(data);
-
-            pictureBox.Image = _image;
-            labelAddress.Text = Address;
+                pictureBox.Image = _image;
+                labelAddress.Text = Address;
+            }
         }
 
         private void buttonClose_Click(object sender, EventArgs e)

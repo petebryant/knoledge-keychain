@@ -35,38 +35,41 @@ namespace knoledge_keychain
 
             Type type = Key.GetType();
 
-            switch (type.ToString())
+            using (new HourGlass())
             {
-                case "knoledge_keychain.KeyPair":
-                    KeyPair keyPair = Key as KeyPair;
-                    privateKey = keyPair.PrivateKeyString;
-                    pubKey = keyPair.PubKey.ToString();
-                    address = keyPair.Address.ToString();
-                    hash = keyPair.PubKey.ExtPubKey.PubKey.Hash.ToString();
-                    script = keyPair.PubKey.ScriptPubKey.ToString();
+                switch (type.ToString())
+                {
+                    case "knoledge_keychain.KeyPair":
+                        KeyPair keyPair = Key as KeyPair;
+                        privateKey = keyPair.PrivateKeyString;
+                        pubKey = keyPair.PubKey.ToString();
+                        address = keyPair.Address.ToString();
+                        hash = keyPair.PubKey.ExtPubKey.PubKey.Hash.ToString();
+                        script = keyPair.PubKey.ScriptPubKey.ToString();
 
-                    if (keyPair.PrivateKey != null)
-                        base58Type = keyPair.PrivateKey.Type.ToString();
-                    else
-                        base58Type = keyPair.PubKey.Type.ToString();
-                    break;
-                case "NBitcoin.BitcoinSecret":
-                    BitcoinSecret secret = Key as BitcoinSecret;
-                    privateKey = secret.ToWif();
-                    bitcoinAddress = secret.GetAddress();
-                    address = bitcoinAddress.ToString();
-                    hash = secret.PubKey.Hash.ToString();
-                    script = bitcoinAddress.ScriptPubKey.ToString();
-                    base58Type = secret.Type.ToString();
-                    break;
-                case "NBitcoin.ExtKey":
-                    ExtKey extKey = Key as ExtKey;
-                    privateKey = extKey.ToString(Network.TestNet);
-                    bitcoinAddress = extKey.ScriptPubKey.GetDestinationAddress(Network.TestNet);
-                    address = bitcoinAddress.ToString();
-                    script = bitcoinAddress.ScriptPubKey.ToString();
-                    break;
+                        if (keyPair.PrivateKey != null)
+                            base58Type = keyPair.PrivateKey.Type.ToString();
+                        else
+                            base58Type = keyPair.PubKey.Type.ToString();
+                        break;
+                    case "NBitcoin.BitcoinSecret":
+                        BitcoinSecret secret = Key as BitcoinSecret;
+                        privateKey = secret.ToWif();
+                        bitcoinAddress = secret.GetAddress();
+                        address = bitcoinAddress.ToString();
+                        hash = secret.PubKey.Hash.ToString();
+                        script = bitcoinAddress.ScriptPubKey.ToString();
+                        base58Type = secret.Type.ToString();
+                        break;
+                    case "NBitcoin.ExtKey":
+                        ExtKey extKey = Key as ExtKey;
+                        privateKey = extKey.ToString(Network.TestNet);
+                        bitcoinAddress = extKey.ScriptPubKey.GetDestinationAddress(Network.TestNet);
+                        address = bitcoinAddress.ToString();
+                        script = bitcoinAddress.ScriptPubKey.ToString();
+                        break;
 
+                }
             }
 
             textBoxType.Text = base58Type;

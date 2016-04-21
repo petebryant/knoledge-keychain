@@ -108,6 +108,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Vanity Address";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormVanityAddress_FormClosing);
+            this.Load += new System.EventHandler(this.FormVanityAddress_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

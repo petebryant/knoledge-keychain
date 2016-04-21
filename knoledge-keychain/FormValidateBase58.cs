@@ -25,15 +25,18 @@ namespace knoledge_keychain
         {
             if (string.IsNullOrEmpty(textBoxAddress.Text))
             {
-                MessageBox.Show("Enter an address or key.");
+                MessageBox.Show(this, "Enter an Address or Key.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            Result = Util.GetBase58Type(textBoxAddress.Text);
+            using (new HourGlass())
+            {
+                Result = Util.GetBase58Type(textBoxAddress.Text);
+            }
 
             if (Result == null)
             {
-                MessageBox.Show("Unrecognized or invalid address/key");
+                MessageBox.Show(this, "Unrecognized or invalid address/key.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

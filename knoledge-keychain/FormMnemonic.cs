@@ -20,14 +20,17 @@ namespace knoledge_keychain
 
         private void buttonGenerate_Click(object sender, EventArgs e)
         {
-            Wordlist wordlist = (Wordlist)comboBoxMnemonic.SelectedItem;
-            WordCount wordcount = (WordCount)comboBoxWordcount.SelectedItem;
+            using (new HourGlass())
+            {
+                Wordlist wordlist = (Wordlist)comboBoxMnemonic.SelectedItem;
+                WordCount wordcount = (WordCount)comboBoxWordcount.SelectedItem;
 
-            Mnemonic mnemo = new Mnemonic(wordlist, wordcount); 
+                Mnemonic mnemo = new Mnemonic(wordlist, wordcount);
 
-            ExtKey hdRoot = mnemo.DeriveExtKey(textBoxPassword.Text);
-            textBoxWordlist.Text = mnemo.ToString();
-            textBoxHDRoot.Text = hdRoot.PrivateKey.GetWif(Network.TestNet).ToString();
+                ExtKey hdRoot = mnemo.DeriveExtKey(textBoxPassword.Text);
+                textBoxWordlist.Text = mnemo.ToString();
+                textBoxHDRoot.Text = hdRoot.PrivateKey.GetWif(Network.TestNet).ToString();
+            }
         }
 
         private void FormMnemonic_Load(object sender, EventArgs e)
@@ -59,12 +62,19 @@ namespace knoledge_keychain
 
         private void buttonRecover_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxWordlist.Text)) return;
+            if (string.IsNullOrEmpty(textBoxWordlist.Text))
+            {
+                MessageBox.Show(this, "Enter a Wordlist.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
-            Wordlist wordlist = (Wordlist)comboBoxMnemonic.SelectedItem;
-            Mnemonic mnemo = new Mnemonic(textBoxWordlist.Text, wordlist);
-            ExtKey hdRoot = mnemo.DeriveExtKey(textBoxPassword.Text);
-            textBoxHDRoot.Text = hdRoot.PrivateKey.GetWif(Network.TestNet).ToString();
+            using (new HourGlass())
+            {
+                Wordlist wordlist = (Wordlist)comboBoxMnemonic.SelectedItem;
+                Mnemonic mnemo = new Mnemonic(textBoxWordlist.Text, wordlist);
+                ExtKey hdRoot = mnemo.DeriveExtKey(textBoxPassword.Text);
+                textBoxHDRoot.Text = hdRoot.PrivateKey.GetWif(Network.TestNet).ToString();
+            }
         }
     }
 }

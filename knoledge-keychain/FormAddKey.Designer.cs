@@ -40,7 +40,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(691, 98);
+            this.buttonCancel.Location = new System.Drawing.Point(691, 157);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 36);
             this.buttonCancel.TabIndex = 5;
@@ -69,7 +69,7 @@
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(610, 98);
+            this.buttonOk.Location = new System.Drawing.Point(610, 157);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 36);
             this.buttonOk.TabIndex = 4;
@@ -88,10 +88,9 @@
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Enabled = false;
-            this.textBoxPassword.Location = new System.Drawing.Point(105, 98);
+            this.textBoxPassword.Location = new System.Drawing.Point(168, 98);
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(476, 26);
+            this.textBoxPassword.Size = new System.Drawing.Size(610, 26);
             this.textBoxPassword.TabIndex = 3;
             // 
             // FormAddKey
@@ -100,7 +99,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(790, 164);
+            this.ClientSize = new System.Drawing.Size(790, 223);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonOk);
