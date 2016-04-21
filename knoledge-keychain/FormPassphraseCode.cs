@@ -78,17 +78,24 @@ namespace knoledge_keychain
 
             using (new HourGlass())
             {
-                BitcoinConfirmationCode confirmationCode = new BitcoinConfirmationCode(textBoxConfirmation.Text, Network.TestNet);
-                BitcoinEncryptedSecretEC encKey = new BitcoinEncryptedSecretEC(textBoxEncKey.Text, Network.TestNet);
-                BitcoinSecret secret = encKey.GetSecret(textBoxPassword.Text);
-                BitcoinAddress address = new BitcoinAddress(textBoxAddress.Text);
-
-                if (confirmationCode.Check(textBoxPassword.Text, address))
+                try
                 {
-                    if (secret.GetAddress() == address)
+                    BitcoinConfirmationCode confirmationCode = new BitcoinConfirmationCode(textBoxConfirmation.Text, Network.TestNet);
+                    BitcoinEncryptedSecretEC encKey = new BitcoinEncryptedSecretEC(textBoxEncKey.Text, Network.TestNet);
+                    BitcoinSecret secret = encKey.GetSecret(textBoxPassword.Text);
+                    BitcoinAddress address = new BitcoinAddress(textBoxAddress.Text);
+
+                    if (confirmationCode.Check(textBoxPassword.Text, address))
                     {
-                        MessageBox.Show(this, "Confirmation that this Address depends on this Passphrase", "knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (secret.GetAddress() == address)
+                        {
+                            MessageBox.Show(this, "Confirmation that this Address depends on the Passphrase", "knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, ex.Message, "knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

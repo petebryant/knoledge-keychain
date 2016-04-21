@@ -53,9 +53,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 81);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 20);
+            this.label2.Size = new System.Drawing.Size(78, 20);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Password:";
+            this.label2.Text = "Password";
             // 
             // buttonOk
             // 
@@ -113,9 +113,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 52);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 20);
+            this.label3.Size = new System.Drawing.Size(111, 20);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Encrypted";
+            this.label3.Text = "Encrypted Key";
             // 
             // FormCrypt
             // 

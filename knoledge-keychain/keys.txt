@@ -29,7 +29,7 @@ Wordcount = 12
 Mnemonic = English
 
 
-Sccret = cNXJ5s3EdRLrcwzsu41UARYh1c59tVcnbekjABGxytGkFzgFfdj6
+Secret = cNXJ5s3EdRLrcwzsu41UARYh1c59tVcnbekjABGxytGkFzgFfdj6
 Password = password
 Encrpted = 6PYNmFkd1iw7JtefDaDzLeGQ5P5zCN44WJ6mfefmTjUV9NXBTHiTcHJZ7D
 

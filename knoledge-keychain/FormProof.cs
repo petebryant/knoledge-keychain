@@ -59,12 +59,12 @@ namespace knoledge_keychain
 
                     if (fromBase58 is BitcoinSecret)
                     {
-                        secret = new BitcoinSecret(textBoxBase58.Text, Network.TestNet);
+                        secret = fromBase58 as BitcoinSecret;
                         address = secret.GetAddress();
                     }
                     else
                     {
-                        address = new BitcoinAddress(textBoxBase58.Text);
+                        address = fromBase58 as BitcoinAddress;
                     }
 
                     sig = textBoxSig.Text;

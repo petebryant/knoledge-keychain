@@ -30,8 +30,18 @@ namespace knoledge_keychain
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxPassword.Text)) return;
+            if (string.IsNullOrEmpty(textBoxPassword.Text))
+            {
+                MessageBox.Show(this, "You must enter a password and a Bitcoin Secret or Encrypted Key.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            if (string.IsNullOrEmpty(textBoxEncrypted.Text) && string.IsNullOrEmpty(textBoxSecret.Text))
+            {
+                MessageBox.Show(this, "You must enter a Bitcoin Secret or Encrypted Key.", "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+             
             if (string.IsNullOrEmpty(textBoxEncrypted.Text))
             {
                 using (new HourGlass())
@@ -47,9 +57,16 @@ namespace knoledge_keychain
 
                 using (new HourGlass())
                 {
-                    BitcoinSecret secret = _result as BitcoinSecret;
-                    BitcoinEncryptedSecret encrypted = secret.Encrypt(textBoxPassword.Text);
-                    textBoxEncrypted.Text = encrypted.ToString();
+                    try
+                    {
+                        BitcoinSecret secret = _result as BitcoinSecret;
+                        BitcoinEncryptedSecret encrypted = secret.Encrypt(textBoxPassword.Text);
+                        textBoxEncrypted.Text = encrypted.ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(this, ex.Message, "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             else if (string.IsNullOrEmpty(textBoxSecret.Text))
@@ -67,8 +84,15 @@ namespace knoledge_keychain
 
                 using (new HourGlass())
                 {
-                    BitcoinEncryptedSecretNoEC encEC = _result as BitcoinEncryptedSecretNoEC;
-                    textBoxSecret.Text = encEC.GetKey(textBoxPassword.Text).GetBitcoinSecret(Network.TestNet).ToString();
+                    try
+                    {
+                        BitcoinEncryptedSecretNoEC encEC = _result as BitcoinEncryptedSecretNoEC;
+                        textBoxSecret.Text = encEC.GetKey(textBoxPassword.Text).GetBitcoinSecret(Network.TestNet).ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(this, ex.Message, "Knoledge-keychain", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                    }
                 }
             }
         }
