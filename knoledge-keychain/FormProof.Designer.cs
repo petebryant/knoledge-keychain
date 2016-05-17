@@ -126,10 +126,10 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(190, 25);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(558, 40);
+            this.label5.Size = new System.Drawing.Size(549, 40);
             this.label5.TabIndex = 0;
             this.label5.Text = "Enter a Base58 Bitcoin Secret or Address, the Message and the Signature \r\nof the " +
-    "signed message,  or click [Create] to create detailas that can be verified.\r\n";
+    "signed message,  or click [Create] to create details that can be verified.\r\n";
             // 
             // FormProof
             // 
